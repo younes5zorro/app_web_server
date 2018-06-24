@@ -1,0 +1,5 @@
+Options +FollowSymlinks
+RewriteEngine on
+
+RewriteRule ^event/([0-9]+)$ event.php?event_id=$1 [NC,L]
+RewriteRule ^member/(.+)/(.+)$ member.php?mail=$1&pass=$2 [NC,L]
