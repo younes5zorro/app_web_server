@@ -2,7 +2,8 @@
 <html>
   <head>
   <link rel="stylesheet" href="style.css">
-
+  <title> Vibration Detector </title>
+  <link rel="icon" href="sa.png">
   </head>
   <body>
   <div class="container">
@@ -21,9 +22,16 @@
       var json;
       var markers = [];
       function addMarker(location) {
+        var icon = {
+            url: "sa.png", // url
+            scaledSize: new google.maps.Size(30, 30 ), // scaled size
+            origin: new google.maps.Point(0,0), // origin
+            anchor: new google.maps.Point(0, 0) // anchor
+        };
         var marker = new google.maps.Marker({
           position: location,
-          map: map
+          map: map,
+          icon:icon
 
         });
         markers.push(marker);
