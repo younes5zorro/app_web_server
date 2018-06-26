@@ -22,6 +22,13 @@ switch ($request_method) {
             $long = $_GET["long"];
             $date = date('Y-m-d H:i:s', $_GET["date"]);
             add_event($vib,$lat,$long,$date);
+        }elseif($_GET["act"] =="map"){
+            if (!empty($_GET["max"])) {
+                $event_max = $_GET["max"];
+                get_eventsMax($event_max);
+            } else {
+                get_eventsMax();
+            }
         }
         break;
 }
@@ -47,6 +54,21 @@ function get_events($event_id = 0)
     $sql = "SELECT * FROM data ";
     if ($event_id != 0) {
         $sql .= " WHERE id  =" . $event_id . " LIMIT 1";
+    }
+    $response = $dbh->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    header('Content-Type: application/json');
+    header('Access-Control-Allow-Origin: *');
+    echo json_encode($response);
+}
+
+function get_eventsMax($event_id = 0)
+{
+    global $dbh;
+    $sql = "SELECT * FROM data ";
+    if ($event_id != 0) {
+        $sql .= " WHERE vib > " . $event_id ;
+    }else{
+        $sql .= " order by  vib desc LIMIT 20" ;
     }
     $response = $dbh->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     header('Content-Type: application/json');
