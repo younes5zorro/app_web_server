@@ -6,19 +6,26 @@ html, body {
 .container{
     height: 100%;
   }
-.range{
+/* .range{
     height : 10%;
     border :1px black ;
     width: 100%;
     padding-top: 20px;
     padding-left: 50px;
-  }
+  } */
+  .slidecontainer {
+    position: absolute;
+    right: 57px;
+    width: 384px;
+    bottom: 39px;
+    z-index: 9999;
+}
  #map {
-    height: 90%;
+    height: 100%;
   }
 
   #myRange{
-      float: left;
+      /* float: left; */
   }
 
   #demo {
@@ -26,16 +33,17 @@ html, body {
     font-size: 30px;
     font-weight: bold;
     text-align: center;
-    float: left;
+    /* float: left;  */
     color:#0896c4;
 }
 
 .slider {
     -webkit-appearance: none;
-    width: 50%;
+    width: 100%;
     height: 15px;
     border-radius: 5px;   
-    background: #d3d3d3;
+    background: linear-gradient(to right, #0896c4 , black);
+    /* background: #d3d3d3; */
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -50,6 +58,7 @@ html, body {
     height: 25px;
     border-radius: 50%; 
     background: #0896c4;
+    border: 1px solid black;
     cursor: pointer;
 }
 

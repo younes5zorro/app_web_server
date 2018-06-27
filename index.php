@@ -7,12 +7,18 @@
   </head>
   <body>
   <div class="container">
-          <div class="range">
+  
+          <!-- <div class="range">
             <div class="slidecontainer">
                <input type="range" min="8"  step="0.111111" max="40" value="9" class="slider" id="myRange">
                <span id="demo"></span>
              </div>
-          </div>
+          </div> -->
+
+          <div class="slidecontainer">
+               <input type="range" min="8"  step="0.111111" max="40" value="9" class="slider" id="myRange">
+               <!-- <span id="demo"></span> -->
+             </div>
           <div id="map"></div>
           </div>
     <script>
@@ -55,7 +61,7 @@
 
       function getdata(max){
         deleteMarkers();
-        $.get("http://localhost/heroku_test/event.php?act=map&max="+max, function(data, status){
+        $.get("https://thawing-fjord-63240.herokuapp.com/event.php?act=map&max="+max, function(data, status){
             for (var i = 0, length = data.length; i < length; i++) {
               var dt = data[i];
               // console.log(dt.id + " " +dt.latitude);
@@ -79,7 +85,7 @@
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
-          center: new google.maps.LatLng(31.6347485,-8.0778939),
+          center: new google.maps.LatLng(31.645486, -8.017844),
           mapTypeId: 'roadmap'
         });
         getdata(9);
@@ -87,11 +93,11 @@
       
       }
       var slider = document.getElementById("myRange");
-      var output = document.getElementById("demo");
-      output.innerHTML = slider.value;
+      // var output = document.getElementById("demo");
+      // output.innerHTML = slider.value;
 
       slider.oninput = function() {
-        output.innerHTML = this.value;
+        // output.innerHTML = this.value;
         getdata(this.value);
       }
     </script>
