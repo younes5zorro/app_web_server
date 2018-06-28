@@ -29,6 +29,13 @@ switch ($request_method) {
             } else {
                 get_eventsMax();
             }
+        }elseif($_GET["act"] =="basta"){
+            if (!empty($_GET["max"])) {
+                $event_min = $_GET["max"];
+                get_event_min($event_min);
+            } else {
+                get_event_min();
+            }
         }
         break;
 }
@@ -37,9 +44,9 @@ switch ($request_method) {
 function getevents()
 {
     global $dbh;
-    $user = 'sql7243965';
-    $pass = '94Ycxm7eGY';
-    $dsn = 'mysql:host=sql7.freemysqlhosting.net;dbname=sql7243965';
+    $user = 'sql2245022';
+    $pass = 'zA3*bC3%';
+    $dsn = 'mysql:host=sql2.freemysqlhosting.net;dbname=sql2245022';
     try {
         $dbh = new PDO($dsn, $user, $pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -67,6 +74,21 @@ function get_eventsMax($event_id = 0)
     $sql = "SELECT * FROM data ";
     if ($event_id != 0) {
         $sql .= " WHERE vib > " . $event_id ;
+    }else{
+        $sql .= " order by  vib desc LIMIT 20" ;
+    }
+    $response = $dbh->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    header('Content-Type: application/json');
+    header('Access-Control-Allow-Origin: *');
+    echo json_encode($response);
+}
+
+function get_event_min($event_id = 0)
+{
+    global $dbh;
+    $sql = "SELECT * FROM data ";
+    if ($event_id != 0) {
+        $sql .= " WHERE vib > " . $event_id ." and date > '2018-06-24'  LIMIT 2000";
     }else{
         $sql .= " order by  vib desc LIMIT 20" ;
     }
